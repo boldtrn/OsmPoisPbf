@@ -258,7 +258,6 @@ public class Scanner {
 		    		}
 		    	}
 		    	
-		    	// Check category
 				entityNeeded = getCategory(tags, filters) != null;
 
 				if(undesiredTags != null){
