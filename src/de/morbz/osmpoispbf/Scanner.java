@@ -43,7 +43,7 @@ import de.morbz.osmpoispbf.utils.StopWatch;
 
 public class Scanner {
 	// Const
-	private static final String VERSION = "v1.1.2";
+	private static final String VERSION = "v1.1.3";
 	
 	// Vars
 	private static Writer writer;
@@ -85,6 +85,7 @@ public class Scanner {
 		options.addOption("rt", "requiredTags", true, "Comma separated list of tags that are required [name]");
 		options.addOption("ut", "undesiredTags", true, "Comma separated list of tags=value combinations that should be filtered [key=value]");
 		options.addOption("ot", "outputTags", true, "Comma separated list of tags that are exported [name]");
+		options.addOption("ph", "printHeader", false, "If flag is set, the `outputTags` are printed as first line in the output file.");
 		options.addOption("r", "relations", false, "Parse relations");
 		options.addOption("nw", "noWays", false, "Don't parse ways");
 		options.addOption("nn", "noNodes", false, "Don't parse nodes");
@@ -230,7 +231,21 @@ public class Scanner {
 			System.out.println("Error: Output file error");
 			System.exit(-1);
 		}
-		
+
+		// Print Header
+		if(line.hasOption("printHeader")) {
+			String header = "category"+separator+"osm_id"+separator+"lat"+separator+"lon";
+			for(int i = 0; i < outputTags.length; i++) {
+				header+=separator+outputTags[i];
+			}
+			try {
+				writer.write(header + "\n");
+			} catch(IOException e) {
+				System.out.println("Error: Output file write error");
+				System.exit(-1);
+			}
+		}
+
 		// Setup OSMonaut
 		EntityFilter filter = new EntityFilter(parseNodes, parseWays, parseRelations);
 		Osmonaut naut = new Osmonaut(inputFile, filter, false);
