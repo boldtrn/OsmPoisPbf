@@ -255,6 +255,7 @@ public class Scanner {
 		stopWatch.start();
 
 		// Start OSMonaut
+		String finalSeparator = String.valueOf(separator);
 		naut.scan(new IOsmonautReceiver() {
 
 			boolean entityNeeded;
@@ -332,7 +333,7 @@ public class Scanner {
 				for(int i = 0; i < outputTags.length; i++) {
 					String key = outputTags[i];
 					if(tags.hasKey(key)) {
-						values[i] = tags.get(key);
+						values[i] = tags.get(key).replaceAll(finalSeparator, "");
 					}
 				}
 		    	
