@@ -258,10 +258,9 @@ public class Scanner {
 		    		}
 		    	}
 		    	
-		    	// Check category
 				entityNeeded = getCategory(tags, filters) != null;
 
-				if(undesiredTags != null){
+				if(undesiredTags != null && entityNeeded){
 					for (String key: undesiredTags.keySet()) {
 						if(tags.hasKey(key)){
 							for (String val: undesiredTags.get(key)) {
