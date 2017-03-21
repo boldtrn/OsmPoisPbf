@@ -44,7 +44,7 @@ public class Poi {
 		// Add basic information
 		str += getEscapedCsvString(cat) + separator;
 		str += wrapIntoQuotes(osmType) + separator;
-		str += osmId + separator;
+		str += wrapIntoQuotes(osmId) + separator;
 		str += round(coords.getLat()) + "" + separator;
 		str += round(coords.getLon()) + "" + separator;
 		
