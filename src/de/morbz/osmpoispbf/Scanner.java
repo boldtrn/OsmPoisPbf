@@ -52,7 +52,7 @@ public class Scanner {
 	private static boolean onlyClosedWays = true;
 	private static boolean printPois = false;
 	private static int poisFound = 0;
-	private static String[] requiredTags = { "name" };
+	private static String[] requiredTags = { };
 	private static String[] outputTags = { "name" };
 	private static Map<String, Set<String>> undesiredTags = null;
 	private static int lastPrintLen = 0;
