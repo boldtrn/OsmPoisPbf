@@ -234,7 +234,7 @@ public class Scanner {
 
 		// Print Header
 		if(line.hasOption("printHeader")) {
-			String header = "category"+separator+"osm_type"+separator+"osm_id"+separator+"lat"+separator+"lon";
+			String header = "category"+separator+"osm_id"+separator+"lat"+separator+"lon";
 			for(int i = 0; i < outputTags.length; i++) {
 				header+=separator+outputTags[i];
 			}

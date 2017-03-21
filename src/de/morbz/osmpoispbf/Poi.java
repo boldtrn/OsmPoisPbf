@@ -21,79 +21,78 @@ import java.util.Locale;
 import net.morbz.osmonaut.osm.LatLon;
 
 public class Poi {
-	private String[] values;
-	private String cat;
-	private LatLon coords;
-	private String osmType;
-	private String osmId;
-	
-	private static String format;
-	private static char separator;
-	
-	public Poi(String[] values, String cat, LatLon coords, String osmType, String osmId) {
-		this.values = values;
-		this.cat = cat;
-		this.coords = coords;
-		this.osmType = osmType;
-		this.osmId = osmId;
-	}
-	
-	public String toCsv() {
-		String str = "";
-		
-		// Add basic information
-		str += getEscapedCsvString(cat) + separator;
-		str += wrapIntoQuotes(osmType) + separator;
-		str += wrapIntoQuotes(osmId) + separator;
-		str += round(coords.getLat()) + "" + separator;
-		str += round(coords.getLon()) + "" + separator;
-		
-		// Add output tags
-		for(int i = 0; i < values.length; i++) {
-			if(values[i] != null) {
-				str += wrapIntoQuotes(getEscapedCsvString(values[i]));
-			}
-			if(values.length - 1 != i) {
-				str += separator;
-			}
-		}
-		return str;
-	}
-	
-	public String toString() {
-		String valStr = "";
-		for(int i = 0; i < values.length; i++) {
-			if(values[i] != null) {
-				valStr += "\"" + getEscapedCsvString(values[i]) + "\"";
-			} else {
-				valStr += "\"\"";
-			}
-			if(values.length - 1 != i) {
-				valStr += ", ";
-			}
-		}
-		return "[Poi(tags=["+valStr+"],osm-id=\""+osmId+"\",cat="+cat+",coords="+coords.toString()+")]";
-	}
+    private String[] values;
+    private String cat;
+    private LatLon coords;
+    private String osmType;
+    private String osmId;
 
-	private String wrapIntoQuotes(String str){
-		return "\""+str+"\"";
-	}
+    private static String format;
+    private static char separator;
 
-	private String getEscapedCsvString(String str) {
-		str = str.replace(separator, ' ');
-		return str;
-	}
-	
-	private String round(double coordinate) {
-		return String.format((Locale)null, format, coordinate);
-	}
-	
-	/* Setters */
-	public static void setDecimals(int decimals) {
-		format = "%." + decimals + "f";
-	}
-	
-	public static void setSeparator(char separator) {
-		Poi.separator = separator;
-	}
+    public Poi(String[] values, String cat, LatLon coords, String osmType, String osmId) {
+        this.values = values;
+        this.cat = cat;
+        this.coords = coords;
+        this.osmType = osmType;
+        this.osmId = osmId;
+    }
+
+    public String toCsv() {
+        String str = "";
+
+        // Add basic information
+        str += getEscapedCsvString(cat) + separator;
+        str += wrapIntoQuotes(osmType + "/" + osmId) + separator;
+        str += round(coords.getLat()) + "" + separator;
+        str += round(coords.getLon()) + "" + separator;
+
+        // Add output tags
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] != null) {
+                str += wrapIntoQuotes(getEscapedCsvString(values[i]));
+            }
+            if (values.length - 1 != i) {
+                str += separator;
+            }
+        }
+        return str;
+    }
+
+    public String toString() {
+        String valStr = "";
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] != null) {
+                valStr += "\"" + getEscapedCsvString(values[i]) + "\"";
+            } else {
+                valStr += "\"\"";
+            }
+            if (values.length - 1 != i) {
+                valStr += ", ";
+            }
+        }
+        return "[Poi(tags=[" + valStr + "],osm-id=\"" + osmId + "\",cat=" + cat + ",coords=" + coords.toString() + ")]";
+    }
+
+    private String wrapIntoQuotes(String str) {
+        return "\"" + str + "\"";
+    }
+
+    private String getEscapedCsvString(String str) {
+        str = str.replace(separator, ' ');
+        return str;
+    }
+
+    private String round(double coordinate) {
+        return String.format((Locale) null, format, coordinate);
+    }
+
+    /* Setters */
+    public static void setDecimals(int decimals) {
+        format = "%." + decimals + "f";
+    }
+
+    public static void setSeparator(char separator) {
+        Poi.separator = separator;
+    }
 }
