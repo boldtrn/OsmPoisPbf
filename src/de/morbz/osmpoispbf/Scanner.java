@@ -234,7 +234,7 @@ public class Scanner {
 
 		// Print Header
 		if(line.hasOption("printHeader")) {
-			String header = "category"+separator+"osm_id"+separator+"lat"+separator+"lon";
+			String header = "category"+separator+"osm_type"+separator+"osm_id"+separator+"lat"+separator+"lon";
 			for(int i = 0; i < outputTags.length; i++) {
 				header+=separator+outputTags[i];
 			}
@@ -314,19 +314,19 @@ public class Scanner {
 				}
 				
 				// Make OSM-ID
-				String id = "";
+				String type = "";
 				switch(entity.getEntityType()) {
 					case NODE:
-						id = "N";
+						type = "node";
 						break;
 					case WAY:
-						id = "W";
+						type = "way";
 						break;
 					case RELATION:
-						id = "R";
+						type = "relation";
 						break;
 				}
-				id += entity.getId();
+				String id = String.valueOf(entity.getId());
 				
 				// Make output tags
 				String[] values = new String[outputTags.length];
@@ -339,7 +339,7 @@ public class Scanner {
 		    	
 		        // Make POI
 				poisFound++;
-				Poi poi = new Poi(values, cat, center, id);
+				Poi poi = new Poi(values, cat, center, type, id);
 				
 				// Output
 				if(printPois) {

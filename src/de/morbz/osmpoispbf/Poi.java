@@ -24,15 +24,17 @@ public class Poi {
 	private String[] values;
 	private String cat;
 	private LatLon coords;
+	private String osmType;
 	private String osmId;
 	
 	private static String format;
 	private static char separator;
 	
-	public Poi(String[] values, String cat, LatLon coords, String osmId) {
+	public Poi(String[] values, String cat, LatLon coords, String osmType, String osmId) {
 		this.values = values;
 		this.cat = cat;
 		this.coords = coords;
+		this.osmType = osmType;
 		this.osmId = osmId;
 	}
 	
@@ -41,6 +43,7 @@ public class Poi {
 		
 		// Add basic information
 		str += getEscapedCsvString(cat) + separator;
+		str += wrapIntoQuotes(osmType) + separator;
 		str += osmId + separator;
 		str += round(coords.getLat()) + "" + separator;
 		str += round(coords.getLon()) + "" + separator;
