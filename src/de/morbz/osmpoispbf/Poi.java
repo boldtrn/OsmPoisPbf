@@ -48,7 +48,7 @@ public class Poi {
 		// Add output tags
 		for(int i = 0; i < values.length; i++) {
 			if(values[i] != null) {
-				str += getEscapedCsvString(values[i]);
+				str += wrapIntoQuotes(getEscapedCsvString(values[i]));
 			}
 			if(values.length - 1 != i) {
 				str += separator;
@@ -71,7 +71,11 @@ public class Poi {
 		}
 		return "[Poi(tags=["+valStr+"],osm-id=\""+osmId+"\",cat="+cat+",coords="+coords.toString()+")]";
 	}
-	
+
+	private String wrapIntoQuotes(String str){
+		return "\""+str+"\"";
+	}
+
 	private String getEscapedCsvString(String str) {
 		str = str.replace(separator, ' ');
 		return str;

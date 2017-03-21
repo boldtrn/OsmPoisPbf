@@ -333,7 +333,7 @@ public class Scanner {
 				for(int i = 0; i < outputTags.length; i++) {
 					String key = outputTags[i];
 					if(tags.hasKey(key)) {
-						values[i] = tags.get(key).replaceAll(finalSeparator, "");
+						values[i] = tags.get(key).replaceAll(finalSeparator, "").replaceAll("\"", "");
 					}
 				}
 		    	
