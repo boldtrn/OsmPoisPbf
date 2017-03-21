@@ -43,7 +43,7 @@ import de.morbz.osmpoispbf.utils.StopWatch;
 
 public class Scanner {
 	// Const
-	private static final String VERSION = "v1.1.3";
+	private static final String VERSION = "v1.1.4";
 	
 	// Vars
 	private static Writer writer;
