@@ -342,10 +342,7 @@ public class Scanner {
 				Poi poi = new Poi(values, cat, center, type, id);
 				
 				// Output
-				if(printPois) {
-					System.out.println(poi);
-				} else if(System.currentTimeMillis() > lastMillis + 40) {
-					// Update counter every 40 millis
+				if(printPois && System.currentTimeMillis() > lastMillis + 40) {
 					printPoisFound();
 					lastMillis = System.currentTimeMillis();
 				}
